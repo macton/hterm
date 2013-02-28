@@ -333,3 +333,6 @@ clipboard should contain the text, "copypasta!".
 
 Note that the specification for OSC 52 mentions destinations other than
 the "c;" system clipboard.  Hterm treats them all as the system clipboard.
+
+----
+
