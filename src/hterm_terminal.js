@@ -240,6 +240,12 @@ hterm.Terminal.prototype.setProfile = function(profileId, opt_callback) {
       terminal.syncBoldSafeState();
     },
 
+    'enable-bright-bold': function(v) {
+      var enableBrightBold = !!v;
+      terminal.primaryScreen_.textAttributes.enableBrightBold = enableBrightBold;
+      terminal.alternateScreen_.textAttributes.enableBrightBold = enableBrightBold;
+    },
+
     'enable-clipboard-write': function(v) {
       terminal.vt.enableClipboardWrite = !!v;
     },

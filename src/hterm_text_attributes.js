@@ -52,6 +52,11 @@ hterm.TextAttributes = function(document) {
 hterm.TextAttributes.prototype.enableBold = true;
 
 /**
+ * If false, bold text is not also auto-promoted to bright colors.
+ */
+hterm.TextAttributes.prototype.enableBrightBold = true;
+
+/**
  * A sentinel constant meaning "whatever the default color is in this context".
  */
 hterm.TextAttributes.prototype.DEFAULT_COLOR = new String('');
@@ -210,6 +215,11 @@ hterm.TextAttributes.prototype.setDefaults = function(foreground, background) {
  */
 hterm.TextAttributes.prototype.syncColors = function() {
   function getBrightIndex(i) {
+    // If auto-bright disabled, return the original index.
+    if (!this.enableBrightBold) {
+      return i;
+    }
+
     if (i < 8) {
       // If the color is from the lower half of the ANSI 16, add 8.
       return i + 8;
