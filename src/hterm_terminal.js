@@ -2467,8 +2467,9 @@ hterm.Terminal.prototype.onResize_ = function() {
   this.realizeSize_(columnCount, rowCount);
   this.showZoomWarning_(this.scrollPort_.characterSize.zoomFactor != 1);
 
-  if (isNewSize)
-    this.overlaySize();
+  // caused ugly white square to come up in terminal
+  // if (isNewSize)
+  //   this.overlaySize();
 
   this.scheduleSyncCursorPosition_();
 };
