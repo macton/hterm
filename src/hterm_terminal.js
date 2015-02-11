@@ -2101,8 +2101,15 @@ hterm.Terminal.prototype.scheduleSyncCursorPosition_ = function() {
 
   var self = this;
   this.timeouts_.syncCursor = setTimeout(function() {
+    
+    // needed if an application takes over the terminal (like less or vim)
+    try {
       self.syncCursorPosition_();
-      delete self.timeouts_.syncCursor;
+    } catch (e) {
+      console.warn(e.message);
+    }
+
+    delete self.timeouts_.syncCursor;
     }, 0);
 };
 
@@ -2460,8 +2467,9 @@ hterm.Terminal.prototype.onResize_ = function() {
   this.realizeSize_(columnCount, rowCount);
   this.showZoomWarning_(this.scrollPort_.characterSize.zoomFactor != 1);
 
-  if (isNewSize)
-    this.overlaySize();
+  // caused ugly white square to come up in terminal
+  // if (isNewSize)
+  //   this.overlaySize();
 
   this.scheduleSyncCursorPosition_();
 };

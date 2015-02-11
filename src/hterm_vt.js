@@ -482,10 +482,13 @@ hterm.VT.prototype.encodeUTF8 = function(str) {
 };
 
 /**
- * Decode a UTF-8 string into UTF-16.
+ * Was supposed to decode a UTF-8 string into UTF-16, but this ruined output of any
+ * special character, so now it does nothing.
+ *
+ * used to be: `return this.utf8Decoder_.decode(str);`
  */
 hterm.VT.prototype.decodeUTF8 = function(str) {
-  return this.utf8Decoder_.decode(str);
+  return str;
 };
 
 /**
