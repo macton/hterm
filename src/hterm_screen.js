@@ -349,7 +349,12 @@ hterm.Screen.prototype.setCursorPosition = function(row, column) {
  * cursor position.
  */
 hterm.Screen.prototype.syncSelectionCaret = function(selection) {
-  selection.collapse(this.cursorNode_, this.cursorOffset_);
+  // This crashed all the time because the cursor offset, looking at the docs
+  // for Selection.collapse, the offset value can only be 0/1. And setting it
+  // to 0 seems to work well(we had an issue where cursoring over quoted text
+  // in vim would make the cursor disappear).
+  //selection.collapse(this.cursorNode_, this.cursorOffset_);
+  selection.collapse(this.cursorNode_, 0);
 };
 
 /**
